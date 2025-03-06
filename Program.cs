@@ -1,54 +1,55 @@
 Console.WriteLine("Введите число: ");
 string num = Console.ReadLine();
-Console.WriteLine("Введите в какой системе ваше число: ");
+Console.WriteLine("Введите систему счисления вашего числа: ");
 int sys = Convert.ToInt32(Console.ReadLine());
+int cif = num.Length;
+int vivod = 0;
 
 while (sys < 2 || sys > 10)
 {
-    Console.WriteLine("Система счисления должна быть введена числом от 2 до 10");
+    Console.WriteLine("Ошибка. Система счисления должна быть числом от 2 до 10");
     Console.WriteLine("Введите систему заново: ");
     sys = Convert.ToInt32(Console.ReadLine());
 }
-Console.WriteLine("Введите систему счисления для перевода от 2 до 9: ");
-int num_sys = Convert.ToInt32(Console.ReadLine());
 
-while (num_sys < 2 || num_sys > 9)
+Console.WriteLine("В какую систему счисления перевести? (от 2 до 9): ");
+int con = Convert.ToInt32(Console.ReadLine());
+
+while (con < 2 || con > 9)
 {
-    Console.WriteLine("Система счисления должна быть введена числом от 2 до 9");
+    Console.WriteLine("Ошибка. Система счисления должна быть числом от 2 до 9");
     Console.WriteLine("Введите систему заново: ");
-    num_sys = Convert.ToInt32(Console.ReadLine());
+    con = Convert.ToInt32(Console.ReadLine());
 }
 
-int vivod = 0;
-int length = num.Length;
-for (int i = 0; i < length; i++)
+for (int i = 0; i < cif; i++)
 {
     char c = num[i];
-    int user_int = c - '0';
+    int C = c - '0';
 
-    if (user_int < 0 || user_int >= sys)
+    if (C < 0 || C >= sys)
     {
-        Console.WriteLine($"Цифра '{c}' недопустима для системы!");
+        Console.WriteLine($"Цифра '{c}' недопустима для системы");
         return;
     }
 
-    int position = length - i - 1;
-    vivod += user_int * (int)Math.Pow(sys, position);
+    int position = cif - i - 1;
+    vivod += C * (int)Math.Pow(sys, position);
 }
 
 if (vivod == 0)
 {
-    Console.WriteLine($"Число в {num_sys}-ой системе: 0");
+    Console.WriteLine($"Число в {con}-ой системе: 0");
     return;
 }
 
-string result = "";
+string vivod2 = "";
 
 while (vivod > 0)
 {
-    int remainder = vivod % num_sys;
-    result = remainder.ToString() + result;
-    vivod = vivod / num_sys;
+    int remainder = vivod % con;
+    vivod2 = remainder.ToString() + vivod2;
+    vivod = vivod / con;
 }
 
-Console.WriteLine($"Число в {num_sys}-ой системе: {result}");
+Console.WriteLine($"Число в {con} системе будет: {vivod2}");
